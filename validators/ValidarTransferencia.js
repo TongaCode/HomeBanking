@@ -1,44 +1,39 @@
-//Validad tranferencia.
+//Validar transferencia
 
 const validarTransferencia = (req, res, next) => {
-    const problemas = [];
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
-    const expSoloNumeros = /^\d+$/;
-    const prefijoPesos = /^cta\$-/;    // Verificar 'cta$-'
-    const prefijoDolares = /^cta\$usd-/; // Verificar 'cta$usd-'
+    const prefijoPesos = /^cta\$-/;
+    const prefijoDolares = /^cta\$usd-/;
 
-    //Validacion emisor
+    let problemas = [];
+
     if (!cuentaEmisor || (cuentaEmisor.trim() === '')) {
-        problemas.push('El campo Emisor esta vacio!.');
-    } else if (!expEmail.test(cuentaEmisor.trim())) {
-        problemas.push('El campo cuentaEmisor es incorrecto, debe ingresar un formato de email!.');
+        problemas.push('El campo Cuenta Emisor esta vacio!.');
+    } else if (!prefijoPesos.test(cuentaEmisor.trim()) && !prefijoDolares.test(cuentaEmisor.trim())) {
+        problemas.push('El numero de cuenta no es correcto!.');
     };
 
-    //Validacion destinatario
     if (!cuentaDestinatario || (cuentaDestinatario.trim() === '')) {
-        problemas.push('El campo Destinatario esta vacio!.');
-    } else if (!expEmail.test(cuentaDestinatario.trim())) {
-        problemas.push('El campo Destinatario es incorrecto, debe ingresar un formato de email!.');
+        problemas.push('El campo Cuenta Destinatario esta vacio!.');
+    } else if (!prefijoPesos.test(cuentaDestinatario.trim()) && !prefijoDolares.test(cuentaDestinatario.trim())) {
+        problemas.push('El numero de cuenta no es correcto!.');
     };
 
-    //Validacion monto
     if (!monto) {
-        problemas.push('El campo Monto esta vacio!.');
-    } else if (!expSoloNumeros.test(monto)) {
-        problemas.push('El campo Monto es incorrecto, debe ingresar solo numeros!.');
+        problemas.push('Monto esta vacio!, ingrese un monto!.');
+    } else if (typeof monto !== 'number') {
+        problemas.push('El campo monto solo puede ingresar numeros!.');
+    } else if (monto === 0) {
+        problemas.push('Debe ingresar un monto para Transferir!.');
+    } else if (monto < 0) {
+        problemas.push('Debe ingresar un monto para transferir!, el monto no puede ser un numero negativo!.');
     };
 
     if (problemas.length > 0) {
-        return res.status(400).json({ error: problemas })
+        return res.status(400).json({ error: problemas });
     };
-
-    if (!prefijoPesos.test(cuentaEmisor)) {
-        problemas.push('Cuenta Emisor invalida!, ingrese una cuenta valida.');
-    } else if (prefijoDolares.test(cuentaDestinatario)) {
-        problemas.push('Cuenta Destinatario invalida!, ingrese una cuenta valida.');
-    };
-
     next();
+
 };
 
-module.exports = validarTransferencia;
+module.exports = validarDepositoExtraccion;
