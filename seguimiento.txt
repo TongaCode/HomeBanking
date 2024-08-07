@@ -7,3 +7,4 @@ termine en la parte de validaciones de extraciones tengo que terminarlo y verifi
 quede en el metodo venta de dolares
 me quede terminando los metodos, ahora todos por separado por numero de cuenta pesos y dolar.
 terminar los bug de metodos
+dejee en las validaciones
