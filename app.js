@@ -75,7 +75,7 @@ app.post('/extraccionCajaAhorroPesos', validarExtraccion, async (req, res) => {
     };
 });
 
-app.post('/extraccionCajaAhorroDolares', async (req, res) => {
+app.post('/extraccionCajaAhorroDolares', validarExtraccion, async (req, res) => {
 
     const { cuentaEmisor, monto } = req.body;
     try {
@@ -93,7 +93,7 @@ app.post('/extraccionCajaAhorroDolares', async (req, res) => {
     };
 });
 
-app.post('/extraccionCuentaCorriente', async (req, res) => {
+app.post('/extraccionCuentaCorriente', validarExtraccion, async (req, res) => {
 
     const { cuentaEmisor, monto } = req.body;
     try {
