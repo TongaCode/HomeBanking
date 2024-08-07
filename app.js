@@ -5,7 +5,7 @@ const crearUsuario = require('./functionUsuario.js/crearUsuario');
 const validarCrearUsuario = require('./validators/validarCrearUsuario');
 const validarDeposito = require('./validators/validarDeposito');
 const validarTransferencia = require('./validators/ValidarTransferencia');
-const validarExtraccionCajaAhorroPesos = require('./validators/validarExtraccionCajaAhorroPesos');
+const validarExtraccion = require('./validators/validarExtraccion');
 const validarBuscarUsuario = require('./validators/validarBuscarUsuario');
 const app = express();
 
@@ -57,7 +57,7 @@ app.get('/buscarUsuario', validarBuscarUsuario, async (req, res) => {
 
 });
 
-app.post('/extraccionCajaAhorroPesos', validarExtraccionCajaAhorroPesos, async (req, res) => {
+app.post('/extraccionCajaAhorroPesos', validarExtraccion, async (req, res) => {
 
     const { cuentaEmisor, monto } = req.body;
     try {

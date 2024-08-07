@@ -1,15 +1,16 @@
 //Validar extraccion
 
-const validarExtraccionCajaAhorroPesos = (req, res, next) => {
+const validarExtraccion = (req, res, next) => {
     const { cuentaEmisor, monto } = req.body;
-    const prefijoPesos = /^cta\$-/;    // Verificar 'cta$-'
+    const prefijoPesos = /^cta\$-/;
+    const prefijoDolares = /^cta\$usd-/;
 
     let problemas = [];
 
     if (!cuentaEmisor || (cuentaEmisor.trim() === '')) {
         problemas.push('El campo Cuenta emisor esta vacio!.');
-    } else if (!prefijoPesos.test(cuentaEmisor.trim())) {
-        problemas.push('El numero de cuenta no es correcto, ingrese un numero de cuenta en pesos!.');
+    } else if (!prefijoPesos.test(cuentaEmisor.trim()) && !prefijoDolares.test(cuentaEmisor.trim())) {
+        problemas.push('El numero de cuenta no es correcto!.');
     };
 
 
@@ -32,4 +33,4 @@ const validarExtraccionCajaAhorroPesos = (req, res, next) => {
 
 };
 
-module.exports = validarExtraccionCajaAhorroPesos;
+module.exports = validarExtraccion;
