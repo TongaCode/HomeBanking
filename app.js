@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const UsuarioModel = require('./models/usuarioModel');
 const crearUsuario = require('./functionUsuario.js/crearUsuario');
 const validarCrearUsuario = require('./validators/validarCrearUsuario');
+const validarTransferencia = require('./validators/ValidarTransferencia');
 const validarDepositoExtraccion = require('./validators/validarDepositoExtraccion');
 const validarBuscarUsuario = require('./validators/validarBuscarUsuario');
 const app = express();
@@ -147,7 +148,7 @@ app.post('/depositoCajaAhorroDolares', validarDepositoExtraccion, async (req, re
     };
 });
 
-app.post('/depositoCuentaCorriente', validarDepositoExtraccion,  async (req, res) => {
+app.post('/depositoCuentaCorriente', validarDepositoExtraccion, async (req, res) => {
 
     try {
         const { cuentaEmisor, monto } = req.body;
@@ -166,14 +167,13 @@ app.post('/depositoCuentaCorriente', validarDepositoExtraccion,  async (req, res
     };
 });
 
-app.post('/transferirCajaAhorroPesos', async (req, res) => {
+app.post('/transferirCajaAhorroPesos', validarTransferencia, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
         const usuario = await UsuarioModel.findOne({ numeroCuentaPesos: cuentaEmisor });
 
         if (!usuario) {
-            console.log(usuario);
             throw new Error('El usuario no existe!.');
         };
 
@@ -186,14 +186,13 @@ app.post('/transferirCajaAhorroPesos', async (req, res) => {
     };
 });
 
-app.post('/transferirCajaAhorroDolares', async (req, res) => {
+app.post('/transferirCajaAhorroDolares', validarTransferencia, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
         const usuario = await UsuarioModel.findOne({ numeroCuentaDolares: cuentaEmisor });
 
         if (!usuario) {
-            console.log(usuario);
             throw new Error('El usuario no existe!.');
         };
 
@@ -206,7 +205,7 @@ app.post('/transferirCajaAhorroDolares', async (req, res) => {
     };
 });
 
-app.post('/transferirCuentaCorriente', async (req, res) => {
+app.post('/transferirCuentaCorriente', validarTransferencia, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
@@ -226,7 +225,7 @@ app.post('/transferirCuentaCorriente', async (req, res) => {
     };
 });
 
-app.post('/comprarDolares', validarDatos,  async (req, res) => {
+app.post('/comprarDolares', async (req, res) => {
     try {
         const { cuentaEmisor, monto } = req.body
 
@@ -246,7 +245,7 @@ app.post('/comprarDolares', validarDatos,  async (req, res) => {
     };
 });
 
-app.post('/venderDolares', validarDatos,  async (req, res) => {
+app.post('/venderDolares', async (req, res) => {
     try {
         const { cuentaEmisor, monto } = req.body
 

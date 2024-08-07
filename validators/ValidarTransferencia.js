@@ -36,4 +36,4 @@ const validarTransferencia = (req, res, next) => {
 
 };
 
-module.exports = validarDepositoExtraccion;
+module.exports = validarTransferencia;
