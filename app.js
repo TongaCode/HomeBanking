@@ -4,7 +4,6 @@ const UsuarioModel = require('./models/usuarioModel');
 const crearUsuario = require('./functionUsuario.js/crearUsuario');
 const validarCrearUsuario = require('./validators/validarCrearUsuario');
 const validarDatos = require('./validators/validarDatos');
-const validarDepositoExtraccion = require('./validators/validarDepositoExtraccion');
 const validarBuscarUsuario = require('./validators/validarBuscarUsuario');
 const app = express();
 
