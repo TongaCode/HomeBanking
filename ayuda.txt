@@ -1,0 +1,26 @@
+my-app/
+│
+├── controllers/
+│   ├── userController.js
+│   └── productController.js
+│
+├── models/
+│   ├── userModel.js
+│   └── productModel.js
+│
+├── views/
+│   ├── userView.ejs
+│   └── productView.ejs
+│
+├── routes/
+│   ├── userRoutes.js
+│   └── productRoutes.js
+│
+├── public/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── app.js
+├── package.json
+└── README.md

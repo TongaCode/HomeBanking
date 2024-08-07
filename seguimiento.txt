@@ -1,0 +1,9 @@
+quede en el metodo divisas, tengo que repasar los errores de entrada de datos al los metodos.
+
+me quede en el metodo trasferir con problema es leer las variables nuevoBalanceDestinatario.
+
+terminar metodo deposito y terminar de separar lasvalidaciones de los metodos
+termine en la parte de validaciones de extraciones tengo que terminarlo y verificar los metodos de los usuarios
+quede en el metodo venta de dolares
+me quede terminando los metodos, ahora todos por separado por numero de cuenta pesos y dolar.
+terminar los bug de metodos
