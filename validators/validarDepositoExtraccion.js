@@ -1,6 +1,6 @@
 //Validar extraccion
 
-const validarExtraccion = (req, res, next) => {
+const validarDepositoExtraccion = (req, res, next) => {
     const { cuentaEmisor, monto } = req.body;
     const prefijoPesos = /^cta\$-/;
     const prefijoDolares = /^cta\$usd-/;
@@ -33,4 +33,4 @@ const validarExtraccion = (req, res, next) => {
 
 };
 
-module.exports = validarExtraccion;
+module.exports = validarDepositoExtraccion;
