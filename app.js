@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const UsuarioModel = require('./models/usuarioModel');
 const crearUsuario = require('./functionUsuario.js/crearUsuario');
 const validarCrearUsuario = require('./validators/validarCrearUsuario');
-const validarTransferencia = require('./validators/ValidarTransferencia');
+const validarDatos = require('./validators/validarDatos');
 const validarDepositoExtraccion = require('./validators/validarDepositoExtraccion');
 const validarBuscarUsuario = require('./validators/validarBuscarUsuario');
 const app = express();
@@ -56,8 +56,7 @@ app.get('/buscarUsuario', validarBuscarUsuario, async (req, res) => {
 
 });
 
-app.post('/extraccionCajaAhorroPesos', validarDepositoExtraccion, async (req, res) => {
-
+app.post('/extraccionCajaAhorroPesos', validarDatos, async (req, res) => {
     const { cuentaEmisor, monto } = req.body;
     try {
         const usuario = await UsuarioModel.findOne({ numeroCuentaPesos: cuentaEmisor });
@@ -74,7 +73,7 @@ app.post('/extraccionCajaAhorroPesos', validarDepositoExtraccion, async (req, re
     };
 });
 
-app.post('/extraccionCajaAhorroDolares', validarDepositoExtraccion, async (req, res) => {
+app.post('/extraccionCajaAhorroDolares', validarDatos, async (req, res) => {
 
     const { cuentaEmisor, monto } = req.body;
     try {
@@ -92,7 +91,7 @@ app.post('/extraccionCajaAhorroDolares', validarDepositoExtraccion, async (req, 
     };
 });
 
-app.post('/extraccionCuentaCorriente', validarDepositoExtraccion, async (req, res) => {
+app.post('/extraccionCuentaCorriente', validarDatos, async (req, res) => {
 
     const { cuentaEmisor, monto } = req.body;
     try {
@@ -110,7 +109,7 @@ app.post('/extraccionCuentaCorriente', validarDepositoExtraccion, async (req, re
     };
 });
 
-app.post('/depositoCajaAhorroPesos', validarDepositoExtraccion, async (req, res) => {
+app.post('/depositoCajaAhorroPesos', validarDatos, async (req, res) => {
 
     try {
         const { cuentaEmisor, monto } = req.body;
@@ -129,7 +128,7 @@ app.post('/depositoCajaAhorroPesos', validarDepositoExtraccion, async (req, res)
     };
 });
 
-app.post('/depositoCajaAhorroDolares', validarDepositoExtraccion, async (req, res) => {
+app.post('/depositoCajaAhorroDolares', validarDatos, async (req, res) => {
 
     try {
         const { cuentaEmisor, monto } = req.body;
@@ -148,7 +147,7 @@ app.post('/depositoCajaAhorroDolares', validarDepositoExtraccion, async (req, re
     };
 });
 
-app.post('/depositoCuentaCorriente', validarDepositoExtraccion, async (req, res) => {
+app.post('/depositoCuentaCorriente', validarDatos, async (req, res) => {
 
     try {
         const { cuentaEmisor, monto } = req.body;
@@ -167,7 +166,7 @@ app.post('/depositoCuentaCorriente', validarDepositoExtraccion, async (req, res)
     };
 });
 
-app.post('/transferirCajaAhorroPesos', validarTransferencia, async (req, res) => {
+app.post('/transferirCajaAhorroPesos', validarDatos, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
@@ -186,7 +185,7 @@ app.post('/transferirCajaAhorroPesos', validarTransferencia, async (req, res) =>
     };
 });
 
-app.post('/transferirCajaAhorroDolares', validarTransferencia, async (req, res) => {
+app.post('/transferirCajaAhorroDolares', validarDatos, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
@@ -205,7 +204,7 @@ app.post('/transferirCajaAhorroDolares', validarTransferencia, async (req, res) 
     };
 });
 
-app.post('/transferirCuentaCorriente', validarTransferencia, async (req, res) => {
+app.post('/transferirCuentaCorriente', validarDatos, async (req, res) => {
     const { cuentaEmisor, cuentaDestinatario, monto } = req.body;
 
     try {
@@ -225,7 +224,7 @@ app.post('/transferirCuentaCorriente', validarTransferencia, async (req, res) =>
     };
 });
 
-app.post('/comprarDolares', async (req, res) => {
+app.post('/comprarDolares', validarDatos, async (req, res) => {
     try {
         const { cuentaEmisor, monto } = req.body
 
@@ -245,7 +244,7 @@ app.post('/comprarDolares', async (req, res) => {
     };
 });
 
-app.post('/venderDolares', async (req, res) => {
+app.post('/venderDolares', validarDatos, async (req, res) => {
     try {
         const { cuentaEmisor, monto } = req.body
 
